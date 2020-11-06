@@ -1,7 +1,8 @@
 import React from 'react';
 import Photo from './Photo';
 
-const PhotoContainer = (props) =>{      
+const PhotoContainer = (props) =>{     
+        console.log("NUMBER OF RESULTS: " + props.photos.length); 
         let photos = props.photos.map( (photo) => {
             return (
                 <li key={photo.id.toString()}>
@@ -13,14 +14,24 @@ const PhotoContainer = (props) =>{
 
         return(
             <div className="photo-container">
-                <h2>Results</h2>
+                { 
+                        (props.photos.length > 0)
+                        ?
+                        <h2>Results</h2>
+                        :
+                        <div></div>
+                }
                 <ul>
-                    { photos }
-                    <li className="not-found">
-                            <h3>No Results Found</h3>
-                            <p>You search did not return any results. Please try again.</p>
-                    </li>
-               
+                    { 
+                        (props.photos.length > 0)
+                        ?
+                        photos
+                        :
+                        <li className="not-found">
+                            <h1>No Results Found</h1>
+                            <p>Your search did not return any results. Please try again.</p>
+                        </li>
+                    }
                 </ul>
             </div>
         );

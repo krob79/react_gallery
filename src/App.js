@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import SearchForm from './SearchForm';
-import Search from './Search';
 import MainNav from './MainNav';
 import PhotoContainer from './PhotoContainer';
+import NotFound from './NotFound';
+import Loading from './Loading';
 import apiKey from './config';
 import {
   BrowserRouter,
@@ -28,6 +29,7 @@ class App extends React.Component {
   }
 
   findPhotos = (tags, property) => {
+    this.setState({loading: true});
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => response.json())
     .then(responseData => {
@@ -38,22 +40,25 @@ class App extends React.Component {
     });
   }
 
-  testFunction = (text) => {
-    console.log(`PASSING ${text} from the child to the parent!`);
-  }
-
   render(){
     return (
       <BrowserRouter>
         <div className="App">
-          <SearchForm />
+          <SearchForm findPhotos={this.findPhotos}/>
           <MainNav />
-          <Switch>
-            <Route path="/cats" render={ () => <PhotoContainer photos={this.state.photos1}/>} />
-            <Route path="/dogs" render={ () => <PhotoContainer photos={this.state.photos2}/>} />
-            <Route path="/computers" render={ () => <PhotoContainer photos={this.state.photos3}/>} />
-            <Route exact path="/:topic" component={Search} />
-          </Switch>
+          { 
+            (this.state.loading)
+            ? 
+            <Loading />
+            :        
+            <Switch>
+              <Route path="/cats" render={ () => <PhotoContainer photos={this.state.photos1}/>} />
+              <Route path="/dogs" render={ () => <PhotoContainer photos={this.state.photos2}/>} />
+              <Route path="/computers" render={ () => <PhotoContainer photos={this.state.photos3}/>} />
+              <Route exact path="/search/:topic" render={ () => <PhotoContainer photos={this.state.photos4}/>} />
+              <Route component={NotFound} />
+            </Switch>
+          }
         </div>
       </BrowserRouter>
     );
