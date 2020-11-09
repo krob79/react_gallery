@@ -17,22 +17,22 @@ const PhotoContainer = (props) =>{
                 { 
                         (props.photos.length > 0)
                         ?
-                        <h2>Results</h2>
+                        <h2>{props.title}</h2>
                         :
                         <div></div>
                 }
-                <ul>
                     { 
                         (props.photos.length > 0)
                         ?
-                        photos
+                        <ul>
+                        {photos}
+                        </ul>
                         :
-                        <li className="not-found">
-                            <h1>No Results Found</h1>
+                        <div className="not-found">
+                            <img src={process.env.PUBLIC_URL + '/noresults.gif'} alt={'No results'}/>
                             <p>Your search did not return any results. Please try again.</p>
-                        </li>
+                        </div>
                     }
-                </ul>
             </div>
         );
 }

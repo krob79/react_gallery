@@ -17,6 +17,7 @@ class SearchForm extends React.Component {
         this.props.findPhotos(search, 'photos4');
         this.setState({value: ''});
         this.props.history.push(`/search/${search}`);
+        this.search.value = '';
         
     }
 
