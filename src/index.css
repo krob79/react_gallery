@@ -78,6 +78,13 @@ input {
   height: 165px;
   overflow: hidden;
   margin-bottom: 15px;
+  transition: transform 1s;
+}
+
+.photo-container ul li:hover {
+  transform: scale(1.65);
+  z-index: 3;
+  
 }
 
 .photo-container ul img {
@@ -87,7 +94,7 @@ input {
 }
 
 .photo-container li:hover img {
-  transform: scale(1.65) rotateY(180deg);
+  
 }
 
 .photo-container .not-found {
