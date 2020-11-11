@@ -73,6 +73,7 @@ input {
 }
 
 .photo-container ul li {
+  border: 2px solid #275270;
   width: 220px;
   height: 165px;
   overflow: hidden;
@@ -86,7 +87,7 @@ input {
 }
 
 .photo-container li:hover img {
-  transform: scale(1.65);
+  transform: scale(1.65) rotateY(180deg);
 }
 
 .photo-container .not-found {

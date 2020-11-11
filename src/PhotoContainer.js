@@ -2,7 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 
 const PhotoContainer = (props) =>{     
-        console.log("NUMBER OF RESULTS: " + props.photos.length); 
+        // Load up photos array with everything that was passed in from props
         let photos = props.photos.map( (photo) => {
             return (
                 <li key={photo.id.toString()}>
@@ -14,6 +14,7 @@ const PhotoContainer = (props) =>{
 
         return(
             <div className="photo-container">
+                {/* Don't display a results title if no results exist */}
                 { 
                         (props.photos.length > 0)
                         ?
@@ -21,18 +22,19 @@ const PhotoContainer = (props) =>{
                         :
                         <div></div>
                 }
-                    { 
-                        (props.photos.length > 0)
-                        ?
-                        <ul>
-                        {photos}
-                        </ul>
-                        :
-                        <div className="not-found">
-                            <img src={process.env.PUBLIC_URL + '/noresults.gif'} alt={'No results'}/>
-                            <p>Your search did not return any results. Please try again.</p>
-                        </div>
-                    }
+                {/* If the photos array length is larger than 0, display its contents, otherwise show the No Results display */}
+                { 
+                    (props.photos.length > 0)
+                    ?
+                    <ul>
+                    {photos}
+                    </ul>
+                    :
+                    <div className="not-found">
+                        <img src={process.env.PUBLIC_URL + '/noresults.gif'} alt={'No results'}/>
+                        <p>Your search did not return any results. Please try again.</p>
+                    </div>
+                } 
             </div>
         );
 }

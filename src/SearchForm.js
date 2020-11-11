@@ -8,15 +8,19 @@ class SearchForm extends React.Component {
     }
 
     handleValueChange = (e) => {
+        // updates state after each keystroke 
         this.setState({value: e.target.value});
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         let search = this.state.value;
+        // makes a call back to parent function in App.js 
         this.props.findPhotos(search, 'photos4');
         this.setState({value: ''});
+        // switches url to search value
         this.props.history.push(`/search/${search}`);
+        // uses ref to clear input value after submission
         this.search.value = '';
         
     }
